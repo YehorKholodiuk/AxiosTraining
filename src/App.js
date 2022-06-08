@@ -29,12 +29,24 @@ function App() {
       setFormTaskName('')
       })
   }
+
+  const deleteCard = (id) => {
+      axios ({
+          url:'https://pasv-kanban.herokuapp.com/card/' + id,
+          method:'DELETE',
+
+      }).then (({data})=> {setCards(data)
+      }).catch(err => {console.log(err)})
+  }
   return (
     <div>
       <button onClick={loadTasks}>Load Tasks</button>
       <ul>
 
-        {cards.map(el => <li key={el.id}>{el.name}</li>)}
+        {cards.map(el => <li key={el.id}>{el.name}
+            <button onClick={() => deleteCard(el.id)}>Delete</button>
+        </li>)}
+
       </ul>
       <hr/>
       <input value={formTaskName} onChange={e => setFormTaskName(e.target.value)}/>
