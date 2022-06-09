@@ -1,10 +1,11 @@
 import logo from './logo.svg';
 import './App.css';
 import axios from 'axios'
-import {useState} from "react";
+import {useEffect, useState} from "react";
 function App() {
   const [cards, setCards] = useState([])
   const [formTaskName, setFormTaskName]=useState([])
+    useEffect(() => {loadTasks()},[])
   const loadTasks = () => {
     console.log('load starts');
     axios ({
